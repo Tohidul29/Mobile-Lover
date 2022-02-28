@@ -39,12 +39,20 @@ const singleDeviceDetails = (mobileSlug) => {
 }
 
 const showDeviceDetails = (deviceInfo) => {
+    console.log(deviceInfo)
     const deviceDetailContainer = document.getElementById('device-details');
     deviceDetailContainer.innerHTML = `
-    <div class="card mb-3 w-50 mx-auto p-4">
-        <img src="${deviceInfo.data.image}" class="card-img-top w-50 mx-auto" alt="...">
-        <div class="card-body text-center">
-            <h5 class="card-title">Card title</h5>
+    <div class="card mb-3 w-75 mx-auto p-4">
+        <img src="${deviceInfo.data.image}" class="card-img-top w-25 mx-auto" alt="...">
+        <div class="card-body text-center mt-3">
+            <h2 class"card-title">Device: ${deviceInfo.data.name}</h2>
+            <h3 class="card-title">Release Date: ${deviceInfo.data.releaseDate}</h3>
+            <h4 class="card-title mt-4">Main Feature: <h5>${deviceInfo.data.mainFeatures.storage}</h5></h4>
+            <h4 class="card-title mt-4">Other Features: 
+                <h5>WLAN: ${deviceInfo.data.others.WLAN}</h5> 
+                <h5>Bluetooth: ${deviceInfo.data.others.Bluetooth}</h5> 
+                <h5>GPS: ${deviceInfo.data.others.GPS}</h5> 
+            </h4>
         </div>
     </div>
     `
