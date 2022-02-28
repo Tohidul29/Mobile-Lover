@@ -2,10 +2,29 @@ const allMobiles = () =>{
     const searchPhone = document.getElementById('user-input');
     searchPhoneValue = searchPhone.value;
     searchPhone.value = '';
-    const url = `https://openapi.programming-hero.com/api/phones?search=${searchPhoneValue}`;
-    fetch(url)
-    .then(response => response.json())
-    .then(data => showSearchingMobiles(data.data))
+
+    const alertMsg = document.getElementById('alert-part');
+    alertMsg.textContent = '';
+    if(searchPhoneValue == ''){
+        alertMsg.innerHTML = `
+            <h5 class='text-danger text-center'>Sorry, No search result found!!! because search box is empty.</h5>
+        `;
+    }
+    else{
+        const url = `https://openapi.programming-hero.com/api/phones?search=${searchPhoneValue}`;
+        fetch(url)
+        .then(response => response.json())
+        .then(data =>{
+            if(data.data[0] == undefined){
+                alertMsg.innerHTML = `
+                <h5 class='text-danger text-center'>Sorry, there have no device like this name!!!</h5>
+            `;
+            }
+            else{
+                showSearchingMobiles(data.data);
+            }
+        })
+    }
 }
 
 const showSearchingMobiles = (mobiles) => {
@@ -41,19 +60,54 @@ const singleDeviceDetails = (mobileSlug) => {
 const showDeviceDetails = (deviceInfo) => {
     console.log(deviceInfo)
     const deviceDetailContainer = document.getElementById('device-details');
-    deviceDetailContainer.innerHTML = `
-    <div class="card mb-3 w-75 mx-auto p-4">
-        <img src="${deviceInfo.data.image}" class="card-img-top w-25 mx-auto" alt="...">
-        <div class="card-body text-center mt-3">
-            <h2 class"card-title">Device: ${deviceInfo.data.name}</h2>
-            <h3 class="card-title">Release Date: ${deviceInfo.data.releaseDate}</h3>
-            <h4 class="card-title mt-4">Main Feature: <h5>${deviceInfo.data.mainFeatures.storage}</h5></h4>
-            <h4 class="card-title mt-4">Other Features: 
-                <h5>WLAN: ${deviceInfo.data.others.WLAN}</h5> 
-                <h5>Bluetooth: ${deviceInfo.data.others.Bluetooth}</h5> 
-                <h5>GPS: ${deviceInfo.data.others.GPS}</h5> 
-            </h4>
+    if(!deviceInfo.data.others){
+        deviceDetailContainer.innerHTML = `
+        <div class="card mb-3 w-75 mx-auto p-4">
+            <img src="${deviceInfo.data.image}" class="card-img-top w-25 mx-auto" alt="...">
+            <div class="card-body text-center mt-3">
+                <h2 class"card-title">Device: ${deviceInfo.data.name}</h2>
+                <h3 class="card-title">Release Date: ${deviceInfo.data.releaseDate}</h3>
+                <h4 class="card-title mt-4">Main Feature: <h5>${deviceInfo.data.mainFeatures.storage}</h5></h4>
+                <h4 class="card-title mt-4">Other Features: 
+                    <h3 class="card-title">Sorry, we don't added other features yet!</h3>
+                </h4>
+            </div>
         </div>
-    </div>
-    `
+        `
+    }
+    else if(deviceInfo.data.releaseDate == ''){
+        deviceDetailContainer.innerHTML = `
+        <div class="card mb-3 w-75 mx-auto p-4">
+            <img src="${deviceInfo.data.image}" class="card-img-top w-25 mx-auto" alt="...">
+            <div class="card-body text-center mt-3">
+                <h2 class"card-title">Device: ${deviceInfo.data.name}</h2>
+                <h3 class="card-title">Release Date: Release date not found!!!</h3>
+                <h4 class="card-title mt-4">Main Feature: <h5>${deviceInfo.data.mainFeatures.storage}</h5></h4>
+                <h4 class="card-title mt-4">Other Features: 
+                    <h5>WLAN: ${deviceInfo.data.others.WLAN}</h5> 
+                    <h5>Bluetooth: ${deviceInfo.data.others.Bluetooth}</h5> 
+                    <h5>GPS: ${deviceInfo.data.others.GPS}</h5> 
+                </h4>
+            </div>
+        </div>
+        `
+    }
+    else{
+        deviceDetailContainer.innerHTML = `
+        <div class="card mb-3 w-75 mx-auto p-4">
+            <img src="${deviceInfo.data.image}" class="card-img-top w-25 mx-auto" alt="...">
+            <div class="card-body text-center mt-3">
+                <h2 class"card-title">Device: ${deviceInfo.data.name}</h2>
+                <h3 class="card-title">Release Date: ${deviceInfo.data.releaseDate}</h3>
+                <h4 class="card-title mt-4">Main Feature: <h5>${deviceInfo.data.mainFeatures.storage}</h5></h4>
+                <h4 class="card-title mt-4">Other Features: 
+                    <h5>WLAN: ${deviceInfo.data.others.WLAN}</h5> 
+                    <h5>Bluetooth: ${deviceInfo.data.others.Bluetooth}</h5> 
+                    <h5>GPS: ${deviceInfo.data.others.GPS}</h5> 
+                </h4>
+            </div>
+        </div>
+        `
+    }
+
 }
