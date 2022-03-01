@@ -42,7 +42,7 @@ const showSearchingMobiles = (mobiles) => {
                     <div class="card-body">
                         <h3 class="card-title">${mobile.phone_name}</h3>
                         <h5 class="card-title">${mobile.brand}</h5>
-                        <button onclick="singleDeviceDetails('${mobile.slug}')" type="button" class="card-title mt-3 btn col-6 btn-primary">Device Details</button>
+                        <button onclick="singleDeviceDetails('${mobile.slug}')" type="button" class="card-title mt-3 btn col-6 btn-primary">Details</button>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@ const showSearchingMobiles = (mobiles) => {
                     <div class="card-body">
                         <h3 class="card-title">${mobile.phone_name}</h3>
                         <h5 class="card-title">${mobile.brand}</h5>
-                        <button onclick="singleDeviceDetails('${mobile.slug}')" type="button" class="card-title mt-3 btn col-6 btn-primary">Device Details</button>
+                        <button onclick="singleDeviceDetails('${mobile.slug}')" type="button" class="card-title mt-3 btn col-6 btn-primary">Details</button>
                     </div>
                 </div>
             </div>
@@ -78,15 +78,17 @@ const singleDeviceDetails = (mobileSlug) => {
 };
 
 const showDeviceDetails = (deviceInfo) => {
+    console.log(deviceInfo)
     const deviceDetailContainer = document.getElementById('device-details');
     if(!deviceInfo.data.others){
         deviceDetailContainer.innerHTML = `
-        <div class="card mb-3 w-75 mx-auto p-4">
+        <div class="card mb-3 w-100 mx-auto p-4">
             <img src="${deviceInfo.data.image}" class="card-img-top w-25 mx-auto" alt="...">
             <div class="card-body text-center mt-3">
                 <h2 class"card-title">Device: ${deviceInfo.data.name}</h2>
                 <h3 class="card-title">Release Date: ${deviceInfo.data.releaseDate}</h3>
                 <h4 class="card-title mt-4">Main Feature: <h5>${deviceInfo.data.mainFeatures.storage}</h5></h4>
+                <h4 class="card-title mt-4">Sensors: <h5>${deviceInfo.data.mainFeatures.sensors}</h5></h4>
                 <h4 class="card-title mt-4">Other Features: 
                     <h3 class="card-title"><span class="text-primary">Sorry, we don't added other features yet!</span></h3>
                 </h4>
@@ -96,12 +98,13 @@ const showDeviceDetails = (deviceInfo) => {
     }
     else if(deviceInfo.data.releaseDate == ''){
         deviceDetailContainer.innerHTML = `
-        <div class="card mb-3 w-75 mx-auto p-4">
+        <div class="card mb-3 w-100 mx-auto p-4">
             <img src="${deviceInfo.data.image}" class="card-img-top w-25 mx-auto" alt="...">
             <div class="card-body text-center mt-3">
                 <h2 class"card-title">Device: ${deviceInfo.data.name}</h2>
                 <h3 class="card-title">Release Date: <span class="text-primary">Release date not found!!!</span></h3>
                 <h4 class="card-title mt-4">Main Feature: <h5>${deviceInfo.data.mainFeatures.storage}</h5></h4>
+                <h4 class="card-title mt-4">Sensors: <h5>${deviceInfo.data.mainFeatures.sensors}</h5></h4>
                 <h4 class="card-title mt-4">Other Features: 
                     <h5>WLAN: ${deviceInfo.data.others.WLAN}</h5> 
                     <h5>Bluetooth: ${deviceInfo.data.others.Bluetooth}</h5> 
@@ -113,12 +116,13 @@ const showDeviceDetails = (deviceInfo) => {
     }
     else{
         deviceDetailContainer.innerHTML = `
-        <div class="card mb-3 w-75 mx-auto p-4">
+        <div class="card mb-3 w-100 mx-auto p-4">
             <img src="${deviceInfo.data.image}" class="card-img-top w-25 mx-auto" alt="...">
             <div class="card-body text-center mt-3">
                 <h2 class"card-title">Device: ${deviceInfo.data.name}</h2>
                 <h3 class="card-title">Release Date: ${deviceInfo.data.releaseDate}</h3>
                 <h4 class="card-title mt-4">Main Feature: <h5>${deviceInfo.data.mainFeatures.storage}</h5></h4>
+                <h4 class="card-title mt-4">Sensors: <h5>${deviceInfo.data.mainFeatures.sensors}</h5></h4>
                 <h4 class="card-title mt-4">Other Features: 
                     <h5>WLAN: ${deviceInfo.data.others.WLAN}</h5> 
                     <h5>Bluetooth: ${deviceInfo.data.others.Bluetooth}</h5> 
