@@ -3,7 +3,7 @@ const allMobiles = () =>{
     searchPhoneValue = searchPhone.value;
     searchPhone.value = '';
 
-    //that concept I use to show alert messages:
+    //here I use to show alert messages:
     const alertMsg = document.getElementById('alert-part');
     alertMsg.textContent = '';
     if(searchPhoneValue == ''){
@@ -80,6 +80,7 @@ const singleDeviceDetails = (mobileSlug) => {
 const showDeviceDetails = (deviceInfo) => {
     console.log(deviceInfo)
     const deviceDetailContainer = document.getElementById('device-details');
+    //that's for those devices who's don't have any other features details:
     if(!deviceInfo.data.others){
         deviceDetailContainer.innerHTML = `
         <div class="card mb-3 w-100 mx-auto p-4">
@@ -90,12 +91,13 @@ const showDeviceDetails = (deviceInfo) => {
                 <h4 class="card-title mt-4">Main Feature: <h5>${deviceInfo.data.mainFeatures.storage}</h5></h4>
                 <h4 class="card-title mt-4">Sensors: <h5>${deviceInfo.data.mainFeatures.sensors}</h5></h4>
                 <h4 class="card-title mt-4">Other Features: 
-                    <h3 class="card-title"><span class="text-primary">Sorry, we don't added other features yet!</span></h3>
+                    <h3 class="card-title"><span class="text-primary">Sorry, we don't added other features yet!!!</span></h3>
                 </h4>
             </div>
         </div>
         `;
     }
+    //that's for those devices who don't have release date:
     else if(deviceInfo.data.releaseDate == ''){
         deviceDetailContainer.innerHTML = `
         <div class="card mb-3 w-100 mx-auto p-4">
@@ -106,14 +108,15 @@ const showDeviceDetails = (deviceInfo) => {
                 <h4 class="card-title mt-4">Main Feature: <h5>${deviceInfo.data.mainFeatures.storage}</h5></h4>
                 <h4 class="card-title mt-4">Sensors: <h5>${deviceInfo.data.mainFeatures.sensors}</h5></h4>
                 <h4 class="card-title mt-4">Other Features: 
-                    <h5>WLAN: ${deviceInfo.data.others.WLAN}</h5> 
-                    <h5>Bluetooth: ${deviceInfo.data.others.Bluetooth}</h5> 
-                    <h5>GPS: ${deviceInfo.data.others.GPS}</h5> 
+                    <h5><span class="fw-bold">WLAN: </span> ${deviceInfo.data.others.WLAN}</h5> 
+                    <h5><span class="fw-bold">Bluetooth: </span> ${deviceInfo.data.others.Bluetooth}</h5> 
+                    <h5><span class="fw-bold">GPS:</span> ${deviceInfo.data.others.GPS}</h5> 
                 </h4>
             </div>
         </div>
         `;
     }
+    //if get all the datas from url then it will go this following way on my device detail part:
     else{
         deviceDetailContainer.innerHTML = `
         <div class="card mb-3 w-100 mx-auto p-4">
@@ -124,9 +127,9 @@ const showDeviceDetails = (deviceInfo) => {
                 <h4 class="card-title mt-4">Main Feature: <h5>${deviceInfo.data.mainFeatures.storage}</h5></h4>
                 <h4 class="card-title mt-4">Sensors: <h5>${deviceInfo.data.mainFeatures.sensors}</h5></h4>
                 <h4 class="card-title mt-4">Other Features: 
-                    <h5>WLAN: ${deviceInfo.data.others.WLAN}</h5> 
-                    <h5>Bluetooth: ${deviceInfo.data.others.Bluetooth}</h5> 
-                    <h5>GPS: ${deviceInfo.data.others.GPS}</h5> 
+                    <h5><span class="fw-bold">WLAN: </span> ${deviceInfo.data.others.WLAN}</h5> 
+                    <h5><span class="fw-bold">Bluetooth: </span> ${deviceInfo.data.others.Bluetooth}</h5> 
+                    <h5><span class="fw-bold">GPS:</span> ${deviceInfo.data.others.GPS}</h5> 
                 </h4>
             </div>
         </div>
