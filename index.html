@@ -9,11 +9,13 @@
     <!-- here I added favicon for my web application -->
     <link rel="shortcut icon" href="./img/mobile-fav-img.png" type="image/x-icon">
     <!-- css links added here -->
+    <link rel="stylesheet" href="./css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
 </head>
 
-<body>
+<body class="custom-bg-color">
     <header>
         <nav class="navbar navbar-dark bg-dark">
             <div class="text-light mx-auto">
@@ -26,7 +28,7 @@
         <!-- user's searching area  -->
         <section class="m-5">
             <div class="input-group mb-3">
-                <input id="user-input" type="text" class="form-control" placeholder="Search your phone name"
+                <input id="user-input" type="text" class="form-control" placeholder="Search your favorite phone"
                     aria-label="Recipient's username" aria-describedby="button-addon2">
                 <button onclick="allMobiles()" class="btn btn-outline-dark" type="button"
                     id="search-btn">Search</button>
