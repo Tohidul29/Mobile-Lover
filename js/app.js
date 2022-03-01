@@ -8,7 +8,7 @@ const allMobiles = () =>{
     alertMsg.textContent = '';
     if(searchPhoneValue == ''){
         alertMsg.innerHTML = `
-            <h5 class='text-danger text-center'>Sorry, No search result found!!! because search box is empty.</h5>
+            <h5 class='text-danger text-center mb-4'>Sorry, No search result found!!! because search box is empty.</h5>
         `;
     }
     else{
@@ -18,7 +18,7 @@ const allMobiles = () =>{
         .then(data =>{
             if(data.data[0] == undefined){
                 alertMsg.innerHTML = `
-                <h5 class='text-danger text-center'>Sorry, there have no device like this name!!!</h5>
+                <h5 class='text-danger text-center mb-4'>Sorry, there have no device like this name!!!</h5>
             `;
             }
             else{
@@ -31,6 +31,8 @@ const allMobiles = () =>{
 const showSearchingMobiles = (mobiles) => {
     const showMobiles = document.getElementById('mobiles-container');
     showMobiles.textContent = '';
+    let deviceDetailContainer = document.getElementById('device-details');
+    deviceDetailContainer.textContent = '';
     let mobilesArray = mobiles.slice(0, 20);
     if(mobiles.length > 20){
         mobilesArray.forEach( mobile => {
@@ -78,8 +80,7 @@ const singleDeviceDetails = (mobileSlug) => {
 };
 
 const showDeviceDetails = (deviceInfo) => {
-    console.log(deviceInfo)
-    const deviceDetailContainer = document.getElementById('device-details');
+    let deviceDetailContainer = document.getElementById('device-details');
     //that's for those devices who's don't have any other features details:
     if(!deviceInfo.data.others){
         deviceDetailContainer.innerHTML = `
